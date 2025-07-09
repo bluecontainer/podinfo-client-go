@@ -27,7 +27,7 @@ Method | HTTP request | Description
 
 ## ApiEchoPost
 
-> map[string]string ApiEchoPost(ctx).Execute()
+> map[string]string ApiEchoPost(ctx).Value(value).Execute()
 
 Echo
 
@@ -46,10 +46,11 @@ import (
 )
 
 func main() {
+	value := "value_example" // string | The text to echo.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.HTTPAPIAPI.ApiEchoPost(context.Background()).Execute()
+	resp, r, err := apiClient.HTTPAPIAPI.ApiEchoPost(context.Background()).Value(value).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `HTTPAPIAPI.ApiEchoPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -61,12 +62,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiApiEchoPostRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **value** | **string** | The text to echo. | 
 
 ### Return type
 
@@ -78,7 +83,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -287,7 +292,7 @@ No authorization required
 
 ## CacheKeyPost
 
-> CacheKeyPost(ctx, key).Execute()
+> CacheKeyPost(ctx, key).Value(value).Execute()
 
 Save payload in cache
 
@@ -307,10 +312,11 @@ import (
 
 func main() {
 	key := "key_example" // string | Key to save to
+	value := "value_example" // string | The value to cache.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.HTTPAPIAPI.CacheKeyPost(context.Background(), key).Execute()
+	r, err := apiClient.HTTPAPIAPI.CacheKeyPost(context.Background(), key).Value(value).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `HTTPAPIAPI.CacheKeyPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -334,6 +340,7 @@ Other parameters are passed through a pointer to a apiCacheKeyPostRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **value** | **string** | The value to cache. | 
 
 ### Return type
 
@@ -345,7 +352,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -877,7 +884,7 @@ No authorization required
 
 ## StorePost
 
-> map[string]string StorePost(ctx).Execute()
+> map[string]string StorePost(ctx).Value(value).Execute()
 
 Upload file
 
@@ -896,10 +903,11 @@ import (
 )
 
 func main() {
+	value := "value_example" // string | The content to store.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.HTTPAPIAPI.StorePost(context.Background()).Execute()
+	resp, r, err := apiClient.HTTPAPIAPI.StorePost(context.Background()).Value(value).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `HTTPAPIAPI.StorePost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -911,12 +919,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiStorePostRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **value** | **string** | The content to store. | 
 
 ### Return type
 
@@ -928,7 +940,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

@@ -26,6 +26,13 @@ type HTTPAPIAPIService service
 type ApiApiEchoPostRequest struct {
 	ctx context.Context
 	ApiService *HTTPAPIAPIService
+	value *string
+}
+
+// The text to echo.
+func (r ApiApiEchoPostRequest) Value(value string) ApiApiEchoPostRequest {
+	r.value = &value
+	return r
 }
 
 func (r ApiApiEchoPostRequest) Execute() (map[string]string, *http.Response, error) {
@@ -35,7 +42,7 @@ func (r ApiApiEchoPostRequest) Execute() (map[string]string, *http.Response, err
 /*
 ApiEchoPost Echo
 
-forwards the call to the backend service and echos the posted content
+forwards the call to the backend service and echos the posted
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiApiEchoPostRequest
@@ -67,9 +74,12 @@ func (a *HTTPAPIAPIService) ApiEchoPostExecute(r ApiApiEchoPostRequest) (map[str
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.value == nil {
+		return localVarReturnValue, nil, reportError("value is required and must be specified")
+	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -85,6 +95,8 @@ func (a *HTTPAPIAPIService) ApiEchoPostExecute(r ApiApiEchoPostRequest) (map[str
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.value
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -420,6 +432,13 @@ type ApiCacheKeyPostRequest struct {
 	ctx context.Context
 	ApiService *HTTPAPIAPIService
 	key string
+	value *string
+}
+
+// The value to cache.
+func (r ApiCacheKeyPostRequest) Value(value string) ApiCacheKeyPostRequest {
+	r.value = &value
+	return r
 }
 
 func (r ApiCacheKeyPostRequest) Execute() (*http.Response, error) {
@@ -462,9 +481,12 @@ func (a *HTTPAPIAPIService) CacheKeyPostExecute(r ApiCacheKeyPostRequest) (*http
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.value == nil {
+		return nil, reportError("value is required and must be specified")
+	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -480,6 +502,8 @@ func (a *HTTPAPIAPIService) CacheKeyPostExecute(r ApiCacheKeyPostRequest) (*http
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.value
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -1308,6 +1332,13 @@ func (a *HTTPAPIAPIService) StoreHashGetExecute(r ApiStoreHashGetRequest) (strin
 type ApiStorePostRequest struct {
 	ctx context.Context
 	ApiService *HTTPAPIAPIService
+	value *string
+}
+
+// The content to store.
+func (r ApiStorePostRequest) Value(value string) ApiStorePostRequest {
+	r.value = &value
+	return r
 }
 
 func (r ApiStorePostRequest) Execute() (map[string]string, *http.Response, error) {
@@ -1349,9 +1380,12 @@ func (a *HTTPAPIAPIService) StorePostExecute(r ApiStorePostRequest) (map[string]
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.value == nil {
+		return localVarReturnValue, nil, reportError("value is required and must be specified")
+	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1367,6 +1401,8 @@ func (a *HTTPAPIAPIService) StorePostExecute(r ApiStorePostRequest) (map[string]
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.value
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

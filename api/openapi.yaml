@@ -27,7 +27,14 @@ paths:
       - HTTP API
   /api/echo:
     post:
-      description: forwards the call to the backend service and echos the posted content
+      description: forwards the call to the backend service and echos the posted
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        description: The text to echo.
+        required: true
       responses:
         "202":
           content:
@@ -38,6 +45,7 @@ paths:
       summary: Echo
       tags:
       - HTTP API
+      x-codegen-request-body-name: value
   /api/info:
     get:
       description: returns the runtime information
@@ -96,6 +104,13 @@ paths:
         required: true
         schema:
           type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        description: The value to cache.
+        required: true
       responses:
         "202":
           content: {}
@@ -103,6 +118,7 @@ paths:
       summary: Save payload in cache
       tags:
       - HTTP API
+      x-codegen-request-body-name: value
   /chunked/{seconds}:
     get:
       description: uses transfer-encoding type chunked to give a partial response
@@ -270,6 +286,13 @@ paths:
     post:
       description: writes the posted content to disk at /data/hash and returns the
         SHA1 hash of the content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        description: The content to store.
+        required: true
       responses:
         "200":
           content:
@@ -280,6 +303,7 @@ paths:
       summary: Upload file
       tags:
       - HTTP API
+      x-codegen-request-body-name: value
   /store/{hash}:
     get:
       description: returns the content of the file /data/hash if exists

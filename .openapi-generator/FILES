@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -19,6 +18,4 @@ model_http_runtime_response.go
 model_http_token_response.go
 model_http_token_validation_response.go
 response.go
-test/api_httpapi_test.go
-test/api_kubernetes_test.go
 utils.go
