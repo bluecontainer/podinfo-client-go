@@ -35,7 +35,7 @@ func (r ApiApiEchoPostRequest) Value(value string) ApiApiEchoPostRequest {
 	return r
 }
 
-func (r ApiApiEchoPostRequest) Execute() (map[string]string, *http.Response, error) {
+func (r ApiApiEchoPostRequest) Execute() (string, *http.Response, error) {
 	return r.ApiService.ApiEchoPostExecute(r)
 }
 
@@ -55,13 +55,13 @@ func (a *HTTPAPIAPIService) ApiEchoPost(ctx context.Context) ApiApiEchoPostReque
 }
 
 // Execute executes the request
-//  @return map[string]string
-func (a *HTTPAPIAPIService) ApiEchoPostExecute(r ApiApiEchoPostRequest) (map[string]string, *http.Response, error) {
+//  @return string
+func (a *HTTPAPIAPIService) ApiEchoPostExecute(r ApiApiEchoPostRequest) (string, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  map[string]string
+		localVarReturnValue  string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HTTPAPIAPIService.ApiEchoPost")
@@ -88,7 +88,7 @@ func (a *HTTPAPIAPIService) ApiEchoPostExecute(r ApiApiEchoPostRequest) (map[str
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"text/plain"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

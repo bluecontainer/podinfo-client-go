@@ -11,32 +11,42 @@ package podinfo
 
 import (
 	"context"
+	"crypto/sha1"
+	"encoding/hex"
+	"testing"
+
+	openapiclient "github.com/bluecontainer/podinfo-client-go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/bluecontainer/podinfo-client-go"
 )
 
+func hash(input string) string {
+	h := sha1.New()
+	h.Write([]byte(input))
+	return hex.EncodeToString(h.Sum(nil))
+}
 func Test_podinfo_HTTPAPIAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
+	configuration.Servers[0].URL = "http://localhost:9898"
 	apiClient := openapiclient.NewAPIClient(configuration)
 
 	t.Run("Test HTTPAPIAPIService ApiEchoPost", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		// t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.HTTPAPIAPI.ApiEchoPost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.HTTPAPIAPI.ApiEchoPost(context.Background()).Value("hello").Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
+		assert.Equal(t, "hello", resp)
+		assert.Equal(t, 202, httpRes.StatusCode)
 
 	})
 
 	t.Run("Test HTTPAPIAPIService ApiInfoGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.HTTPAPIAPI.ApiInfoGet(context.Background()).Execute()
 
@@ -48,7 +58,7 @@ func Test_podinfo_HTTPAPIAPIService(t *testing.T) {
 
 	t.Run("Test HTTPAPIAPIService CacheKeyDelete", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var key string
 
@@ -61,7 +71,7 @@ func Test_podinfo_HTTPAPIAPIService(t *testing.T) {
 
 	t.Run("Test HTTPAPIAPIService CacheKeyGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var key string
 
@@ -75,7 +85,7 @@ func Test_podinfo_HTTPAPIAPIService(t *testing.T) {
 
 	t.Run("Test HTTPAPIAPIService CacheKeyPost", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var key string
 
@@ -88,7 +98,7 @@ func Test_podinfo_HTTPAPIAPIService(t *testing.T) {
 
 	t.Run("Test HTTPAPIAPIService ChunkedSecondsGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var seconds int32
 
@@ -102,7 +112,7 @@ func Test_podinfo_HTTPAPIAPIService(t *testing.T) {
 
 	t.Run("Test HTTPAPIAPIService DelaySecondsGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var seconds int32
 
@@ -116,7 +126,7 @@ func Test_podinfo_HTTPAPIAPIService(t *testing.T) {
 
 	t.Run("Test HTTPAPIAPIService EnvGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.HTTPAPIAPI.EnvGet(context.Background()).Execute()
 
@@ -128,7 +138,7 @@ func Test_podinfo_HTTPAPIAPIService(t *testing.T) {
 
 	t.Run("Test HTTPAPIAPIService HeadersGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.HTTPAPIAPI.HeadersGet(context.Background()).Execute()
 
@@ -140,7 +150,7 @@ func Test_podinfo_HTTPAPIAPIService(t *testing.T) {
 
 	t.Run("Test HTTPAPIAPIService PanicGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		httpRes, err := apiClient.HTTPAPIAPI.PanicGet(context.Background()).Execute()
 
@@ -151,7 +161,7 @@ func Test_podinfo_HTTPAPIAPIService(t *testing.T) {
 
 	t.Run("Test HTTPAPIAPIService RootGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.HTTPAPIAPI.RootGet(context.Background()).Execute()
 
@@ -163,7 +173,7 @@ func Test_podinfo_HTTPAPIAPIService(t *testing.T) {
 
 	t.Run("Test HTTPAPIAPIService StatusCodeGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var code int32
 
@@ -177,7 +187,7 @@ func Test_podinfo_HTTPAPIAPIService(t *testing.T) {
 
 	t.Run("Test HTTPAPIAPIService StoreHashGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var hash string
 
@@ -191,19 +201,19 @@ func Test_podinfo_HTTPAPIAPIService(t *testing.T) {
 
 	t.Run("Test HTTPAPIAPIService StorePost", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		// t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.HTTPAPIAPI.StorePost(context.Background()).Execute()
+		resp, httpRes, err := apiClient.HTTPAPIAPI.StorePost(context.Background()).Value("hello").Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
+		assert.Equal(t, 202, httpRes.StatusCode)
+		assert.Equal(t, resp["hash"], hash("hello"))
 	})
 
 	t.Run("Test HTTPAPIAPIService TokenPost", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.HTTPAPIAPI.TokenPost(context.Background()).Execute()
 
@@ -215,7 +225,7 @@ func Test_podinfo_HTTPAPIAPIService(t *testing.T) {
 
 	t.Run("Test HTTPAPIAPIService TokenValidatePost", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.HTTPAPIAPI.TokenValidatePost(context.Background()).Execute()
 
@@ -227,7 +237,7 @@ func Test_podinfo_HTTPAPIAPIService(t *testing.T) {
 
 	t.Run("Test HTTPAPIAPIService VersionGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.HTTPAPIAPI.VersionGet(context.Background()).Execute()
 
@@ -239,7 +249,7 @@ func Test_podinfo_HTTPAPIAPIService(t *testing.T) {
 
 	t.Run("Test HTTPAPIAPIService WsEchoPost", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.HTTPAPIAPI.WsEchoPost(context.Background()).Execute()
 

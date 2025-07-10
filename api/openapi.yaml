@@ -38,9 +38,9 @@ paths:
       responses:
         "202":
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: "#/components/schemas/http.MapResponse"
+                type: string
           description: Accepted
       summary: Echo
       tags:

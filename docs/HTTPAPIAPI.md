@@ -27,7 +27,7 @@ Method | HTTP request | Description
 
 ## ApiEchoPost
 
-> map[string]string ApiEchoPost(ctx).Value(value).Execute()
+> string ApiEchoPost(ctx).Value(value).Execute()
 
 Echo
 
@@ -55,7 +55,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `HTTPAPIAPI.ApiEchoPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ApiEchoPost`: map[string]string
+	// response from `ApiEchoPost`: string
 	fmt.Fprintf(os.Stdout, "Response from `HTTPAPIAPI.ApiEchoPost`: %v\n", resp)
 }
 ```
@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**map[string]string**
+**string**
 
 ### Authorization
 
@@ -84,7 +84,7 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: text/plain
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
